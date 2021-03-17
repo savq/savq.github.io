@@ -1,4 +1,5 @@
-The purpose of this website is twofold:
+Repo for my personal website.
 
-- To write more
-- To learn at least _some_ web stuff
+**TODO:**
+- Add a font
+- Migrate wiki notes here

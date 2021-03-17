@@ -1,7 +1,11 @@
 html {
     max-width: 80ch;
     margin: 0 auto;
-    background-color: #f1f1f1;
+    background-color: #F1F1F1;
+}
+
+header {
+    text-align: right;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -18,5 +22,5 @@ a {
 }
 
 a:hover {
-    background-color: #C6ECEC;
+    background-color: #DDEEEE;
 }
