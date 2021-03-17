@@ -1,0 +1,22 @@
+html {
+    max-width: 80ch;
+    margin: 0 auto;
+    background-color: #f1f1f1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: sans-serif;
+}
+
+p {
+    font-size: 18px;
+}
+
+a {
+    color: #267373;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #C6ECEC;
+}
