@@ -1,4 +1,5 @@
 html {
+    font-family: 'Charter', Garamond, Palatino, Georgia, serif;
     max-width: 80ch;
     margin: 0 auto;
     background-color: #F1F1F1;
@@ -8,12 +9,20 @@ header {
     text-align: right;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: sans-serif;
+h1, h2, h3, .title, .subtitle {
+    font-family: Helvetica, sans-serif;
+    font-weight: lighter;
+    margin-top: 1.5em;
+    margin-bottom: 0;
 }
 
 p {
     font-size: 18px;
+}
+
+ul {
+    list-style-type: circle;
+    line-height: 2em;
 }
 
 a {
