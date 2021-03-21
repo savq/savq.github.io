@@ -1,5 +1,5 @@
 Repo for my personal website.
 
 **TODO:**
-- monospaced font
+- Monospaced font and code listings
 - Migrate wiki notes here
