@@ -2,4 +2,6 @@
 title = "Notes"
 +++
 
-These are some of my notes, in no particular order.
+These are my notes, at least the ones I've moved here…
+They're not in any particular order.
+
