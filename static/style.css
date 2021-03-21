@@ -20,10 +20,18 @@ p {
     font-size: 18px;
 }
 
-ul {
+
+ul li {
     list-style-type: circle;
     line-height: 2em;
 }
+
+ul li ul li {
+    list-style-type: circle;
+    margin-top: 0;
+    line-height: 1.2em;
+}
+
 
 a {
     color: #267373;
