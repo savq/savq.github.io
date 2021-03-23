@@ -23,13 +23,12 @@ p {
 
 ul li {
     list-style-type: circle;
-    line-height: 2em;
+    margin-bottom: 1.5em;
 }
 
 ul li ul li {
     list-style-type: circle;
-    margin-top: 0;
-    line-height: 1.2em;
+    margin-bottom: 0em;
 }
 
 
