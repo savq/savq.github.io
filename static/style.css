@@ -1,8 +1,39 @@
+/* TODO: custom properties */
+
+@media (prefers-color-scheme: dark) {
+    html{
+        color: #e9e9e9;
+        background-color: #222222;
+    }
+
+    a {
+    color: #9CC9C9;
+    }
+
+    a:hover {
+        background-color: #293D3D;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    html{
+        background-color: #F1F1F1;
+    }
+
+    a {
+    color: #267373;
+    }
+
+    a:hover {
+        background-color: #DDEEEE;
+    }
+}
+
+
 html {
     font-family: 'Charter', Garamond, Palatino, Georgia, serif;
     max-width: 80ch;
     margin: 0 auto;
-    background-color: #F1F1F1;
 }
 
 header {
@@ -33,10 +64,6 @@ ul li ul li {
 
 
 a {
-    color: #267373;
     text-decoration: none;
 }
 
-a:hover {
-    background-color: #DDEEEE;
-}
