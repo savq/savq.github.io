@@ -20,4 +20,7 @@ really good, or both.
   (Saša Jurić, 2019)
 * [The Soul of a New Machine: Rethinking the Computer](https://youtu.be/vvZA9n3e5pc)
   (Bryan Cantrill, 2020)
-
+* [A New Golden Age for Computer Architecture: History, Challenges and Opportunities](https://youtu.be/kFT54hO1X8M)
+  (David Patterson, 2019)
+* [The Golden Age of Compiler Design in an Era of HW/SW Co-design](https://youtu.be/4HgShra-KnY)
+  (Chris Lattner, 2021)
