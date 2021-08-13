@@ -53,7 +53,7 @@ online, so I guess it's main advantage is that it isn't so long.
 
 
 ## Computer architecture
-- Patterson and Hennessy, _Computer Organization and Design: The Hardware/Software Interface - RISC-V Edition_
+- Patterson and Hennessy, _Computer Organization and Design - RISC-V Edition_
   - _Great book._ I think it's the only one on the list that I've read on my free time.
 - Nisan and Schocken, _Elements of Computing Systems_ (nand2tetris)
   - Only the first part is focused on computer architecture.
