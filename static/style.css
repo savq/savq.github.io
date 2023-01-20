@@ -1,3 +1,4 @@
+/* TODO: Better syntax highlighting */
 @import url("/syntax-theme-dark.css") (prefers-color-scheme: dark);
 @import url("/syntax-theme-light.css") (prefers-color-scheme: light);
 
@@ -39,6 +40,11 @@ a:hover {
 
 time {
     color: var(--subtle);
+}
+
+blockquote {
+    color: var(--subtle);
+    font-size: 0.9em;
 }
 
 .navbar {
