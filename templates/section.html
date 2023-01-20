@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="title">
-  {{ section.title }}
-</h1>
+{# <h1>{{ section.title }}</h1> #}
 {{ section.content | safe }}
 <ul>
-  {% for page in section.pages %}
-  <li><a href="{{ page.permalink | safe }}">{{ page.title }}</a></li>
-  {% endfor %}
+    {% for page in section.pages %}
+    <li>
+        <time>{{ page.date }}</time>
+        <a href="{{ page.permalink | safe }}">{{ page.title }}</a>
+    </li>
+    {% endfor %}
 </ul>
 {% endblock content %}

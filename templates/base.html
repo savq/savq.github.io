@@ -1,37 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="/style.css">
     {% block head %}
     <title>savq.github.io</title>
     {% endblock %}
 </head>
-
 <body>
-    <header>
-        <nav class=menu>
-            <ul>
-                <li>
-                    <a href="/">About</a>
-                </li>
-                <li>
-                    <a href="/notes/">Notes</a>
-                </li>
-                <li>
-                    <a href="https://www.github.com/savq">GitHub</a>
-                </li>
-            </ul>
-        </nav>
+    <header class="navbar">
+        <div></div>
+        <a href="/">savq</a>
+        <a href="https://www.github.com/savq">GitHub</a>
     </header>
-    <div class="container">
+    <main>
         {% block content %} {% endblock %}
-    </div>
-
-    <!-- <footer>
-        MAYBE-TODO: Add footer
-    </footer> -->
+    </main>
+    {# <footer></footer> #}
 </body>
-
 </html>

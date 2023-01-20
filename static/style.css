@@ -1,74 +1,54 @@
-/* TODO:
- * Choose better colors?
- * Responsive font sizes
- * Monospaced font for code listings
- */
+:root {
+    --bg: #F1F1F1;      /* 95 */
+    --fg: #222222;      /* 15 */
+    --subtle: #848484;  /* 55 */
+    --link-bg: #D1E7E8; /* 200 30 90 */
+    --link-fg: #6E9A9C; /* 60 */
+}
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --my-fg: #e9e9e9;
-        --my-bg: #222222;
-        --my-link-fg: #9CC9C9;
-        --my-link-bg: #293D3D;
+        --bg: #222222;
+        --fg: #F1F1F1;
+        --subtle: #B9B9B9;  /* 75 */
+        --link-bg: #304B4D; /* 30 */
     }
 }
 
-@media (prefers-color-scheme: light) {
-    :root {
-        --my-fg: #0A0A0A;
-        --my-bg: #F1F1F1;
-        --my-link-fg: #267373;
-        --my-link-bg: #DDEEEE;
-    }
-}
+html {
+    max-width: 70ch;
+    padding: 3em 1em;
+    margin: auto;
+    line-height: 1.5;
+    font-family: sans-serif;
 
-html{
-    color: var(--my-fg);
-    background-color: var(--my-bg);
-
-    font-family: 'Charter', Garamond, Palatino, Georgia, serif;
-    max-width: 80ch;
-    margin: 0 auto;
+    background-color: var(--bg);
+    color: var(--fg);
 }
 
 a {
-    color: var(--my-link-fg);
+    color: var(--link-fg);
 }
 
 a:hover {
-    background-color: var(--my-link-bg);
+    background-color: var(--link-bg);
 }
 
-header {
-    text-align: right;
+time {
+    color: var(--subtle);
 }
 
-h1, h2, h3, .title, .subtitle {
-    font-family: Helvetica, sans-serif;
-    font-weight: lighter;
-    margin-top: 1.5em;
-    margin-bottom: 0;
+.navbar {
+    display: flex;
+    justify-content: space-around;
 }
 
-p {
-    font-size: 18px;
+.navbar > a {
+    flex: 1;
+    text-align: center;
 }
 
-li {
-    list-style-type: circle;
-    margin-bottom: 1em;
-}
-
-ul li ul li {
-    margin-bottom: 0em;
-}
-
-.menu ul li {
-    text-align: right;
-    display: inline;
-    margin-left: 2em;
-}
-
-a {
-    text-decoration: none;
+/* TODO: How to fill navbar without an empty div? */
+.navbar > div {
+    flex: 2;
 }
