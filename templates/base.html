@@ -7,16 +7,24 @@
     {% block head %}
     <title>savq.github.io</title>
     {% endblock %}
+    {% block rss %}
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
+    {% endblock %}
 </head>
 <body>
     <header class="navbar">
-        <div></div>
-        <a href="/">savq</a>
-        <a href="https://www.github.com/savq">GitHub</a>
+        <a href="/">Sergio A. Vargas</a>
+        <a href="https://github.com/savq">GitHub</a>
+        {# TODO:
+        <a href="https://github.com/savq">LinkedIn</a>
+        #}
     </header>
     <main>
         {% block content %} {% endblock %}
     </main>
-    {# <footer></footer> #}
+    <footer>
+        <a href="https://github.com/savq/savq.github.io">Source</a>
+        <a href="/atom.xml">Feed</a>
+    </footer>
 </body>
 </html>

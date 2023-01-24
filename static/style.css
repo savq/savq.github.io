@@ -5,7 +5,7 @@
 :root {
     --bg: #F1F1F1;      /* 95 */
     --fg: #222222;      /* 15 */
-    --subtle: #848484;  /* 55 */
+    --subtle: #6A6A6A;  /* 50 */
     --link-bg: #D1E7E8; /* 200 30 90 */
     --link-fg: #6E9A9C; /* 60 */
 }
@@ -20,22 +20,23 @@
 }
 
 html {
-    max-width: 70ch;
-    padding: 3em 1em;
-    margin: auto;
-    line-height: 1.5;
-    font-family: sans-serif;
-
     background-color: var(--bg);
     color: var(--fg);
+    font-family: sans-serif;
+    height: 100%;
+    line-height: 1.5;
+    margin: auto;
+    max-width: 70ch;
 }
 
 a {
     color: var(--link-fg);
+    text-decoration: none;
 }
 
 a:hover {
     background-color: var(--link-bg);
+    text-decoration: underline;
 }
 
 time {
@@ -47,17 +48,31 @@ blockquote {
     font-size: 0.9em;
 }
 
+
+/* Navigation bar */
+
 .navbar {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    border-bottom: thin solid var(--fg);
+    padding-bottom: 0.5em;
 }
 
-.navbar > a {
-    flex: 1;
+
+/* Sticky footer */
+
+body {
+    height: 100%;
+}
+
+body > footer {
+    border-top: thin solid var(--fg);
+    margin-bottom: 0.5em;
+    position: sticky;
+    top: 100vh;
     text-align: center;
 }
 
-/* TODO: How to fill navbar without an empty div? */
-.navbar > div {
-    flex: 2;
+footer > a {
+    margin: 0em 1em;
 }
