@@ -19,7 +19,7 @@
     }
 }
 
-html {
+html, body {
     background-color: var(--bg);
     color: var(--fg);
     font-family: sans-serif;
@@ -27,6 +27,7 @@ html {
     line-height: 1.5;
     margin: auto;
     max-width: 70ch;
+    padding: 0em 0.25em;
 }
 
 a {
@@ -55,19 +56,15 @@ blockquote {
     display: flex;
     justify-content: space-between;
     border-bottom: thin solid var(--fg);
-    padding-bottom: 0.5em;
+    padding: 0.5em 0em;
 }
 
 
 /* Sticky footer */
 
-body {
-    height: 100%;
-}
-
 body > footer {
     border-top: thin solid var(--fg);
-    margin-bottom: 0.5em;
+    padding: 0.5em 0em;
     position: sticky;
     top: 100vh;
     text-align: center;
