@@ -156,3 +156,5 @@ or contributing to tree-sitter to facilitate defining these rules in the grammar
 
 The tree-sitter grammar could also be used as a starting point to specify a formal grammar for Julia.
 
+<!-- pandoc --variable urlcolor=teal --lua-filter ./smallcaps.lua -o draft.pdf report.md -->
+
