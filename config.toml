@@ -11,9 +11,12 @@ build_search_index = false
 generate_feed = true
 
 [markdown]
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+smart_punctuation = true
+
+# Enable syntax highlighting
 highlight_code = true
+
+# Use a different theme for light/dark mode. See ./static/style.css
 highlight_theme = "css"
 highlight_themes_css = [
   { theme = "ayu-dark", filename = "syntax-theme-dark.css" },

@@ -82,8 +82,8 @@ During this second stage the main set of rules I worked on were:
 
 The first stage focused on trying to simplify the grammar and improve code reuse,
 but some of those changes had to be undone in the second stage for multiple reasons.
-For example, many derivations can be parsed by the Julia parser, but have no associated semantics,
-so in practice they're invalid Julia code.
+For example, many derivations can be parsed by Julia, but have no associated semantics,
+so in practice they're invalid code.
 However, these "invalid" expressions can be used inside macros to define custom DSLs.
 Popular packages such as [JuMP.jl](https://github.com/jump-dev/JuMP.jl) and [Gen.jl](https://github.com/probcomp/Gen.jl)
 use "invalid" code in their DSLs.
@@ -129,7 +129,8 @@ The following quotation is syntactically valid, but cannot be evaluated because 
 
 ```julia
 quote
-  function f(1, 2, 3) end
+  function f(1, 2, 3) # Nonsense, but it parses fine.
+  end
 end
 ```
 
