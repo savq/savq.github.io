@@ -1,5 +1,6 @@
 +++
 title = "Improving tree-sitter-julia"
+authors = ["Sergio A. Vargas"]
 date = 2022-12-27
 +++
 

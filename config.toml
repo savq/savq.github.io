@@ -1,19 +1,15 @@
 # The URL the site will be built for
 base_url = "https://savq.github.io"
 
-# Whether to automatically compile all Sass files in the sass directory
-compile_sass = false
-
-# Whether to build a search index to be used later on by a JavaScript library
-build_search_index = false
-
-# Generate an Atom feed automatically
+# Feed
 generate_feed = true
+title = "savq"
+description = "Sergio A. Vargas' Blog"
+default_language = "en"
 
 [markdown]
 smart_punctuation = true
 
-# Enable syntax highlighting
 highlight_code = true
 
 # Use a different theme for light/dark mode. See ./static/style.css
