@@ -2,7 +2,7 @@
 base_url = "https://savq.github.io"
 
 # Feed
-generate_feed = true
+generate_feeds = true
 title = "savq"
 description = "Sergio A. Vargas' Blog"
 default_language = "en"
