@@ -40,13 +40,17 @@ a:hover {
     text-decoration: underline;
 }
 
-time {
-    color: var(--subtle);
-}
-
 blockquote {
     color: var(--subtle);
     font-size: 0.9em;
+}
+
+.page-date {
+    color: var(--subtle);
+}
+
+.page-list {
+  list-style-type: none;
 }
 
 
