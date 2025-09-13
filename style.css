@@ -1,0 +1,88 @@
+/* TODO: Better syntax highlighting */
+@import url("/syntax-theme-dark.css") (prefers-color-scheme: dark);
+@import url("/syntax-theme-light.css") (prefers-color-scheme: light);
+
+:root {
+    --bg: #F1F1F1;      /* 95 */
+    --fg: #222222;      /* 15 */
+    --subtle: #6A6A6A;  /* 50 */
+    --link-bg: #D1E7E8; /* 200 30 90 */
+    --link-fg: #6E9A9C; /* 60 */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #222222;
+        --fg: #F1F1F1;
+        --subtle: #B9B9B9;  /* 75 */
+        --link-bg: #304B4D; /* 30 */
+    }
+}
+
+html, body {
+    background-color: var(--bg);
+    color: var(--fg);
+    font-family: sans-serif;
+    height: 100%;
+    line-height: 1.5;
+    margin: auto;
+    max-width: 70ch;
+    padding: 0em 0.25em;
+}
+
+a {
+    color: var(--link-fg);
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: var(--link-bg);
+    text-decoration: underline;
+}
+
+blockquote {
+    color: var(--subtle);
+    font-size: 0.9em;
+}
+
+.page-date {
+    color: var(--subtle);
+}
+
+.page-list {
+  list-style-type: none;
+}
+
+
+/* Navigation bar */
+
+.navbar {
+    border-bottom: thin solid var(--fg);
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 0em;
+}
+
+.navbar a:first-child {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.navbar a {
+  margin-left: 1rem;
+}
+
+
+/* Sticky footer */
+
+body > footer {
+    border-top: thin solid var(--fg);
+    padding: 0.5em 0em;
+    position: sticky;
+    top: 100vh;
+    text-align: center;
+}
+
+footer > a {
+    margin: 0em 1em;
+}

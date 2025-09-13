@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    
+<title>Improving tree-sitter-julia</title>
+
+    
+    <link rel="alternate" type="application/atom+xml" title="Atom Feed" href="https://savq.github.io/atom.xml">
+    
+</head>
+<body>
+    <header class="navbar">
+        <a href="/">Sergio A. Vargas</a>
+        <a href="https://github.com/savq">GitHub</a>
+        <a href="https://www.linkedin.com/in/sergio-a-vargas-2232bb196">LinkedIn</a>
+    </header>
+    <main>
+        
+<article>
+    <header>
+        <h1>Improving tree-sitter-julia</h1>
+        <time class="page-date">2022-12-27</time>
+    </header>
+    <blockquote>
+<p>This report was originally presented as part of an independent contractor agreement with NumFOCUS/Julia Language.</p>
+</blockquote>
+<p>This report presents the work done to improve the <a href="https://github.com/tree-sitter/tree-sitter-julia">tree-sitter-julia</a> parser.
+The parser is generated from a DSL for context-free grammars,
+so the terms <em>parser</em> and <em>grammar</em> are used interchangeably.</p>
+<p>The main objective was to improve the design and implementation of the tree-sitter parser for Julia,
+with the goal of parsing 99% of the lines of code from a <a href="https://github.com/returntocorp/ocaml-tree-sitter-semgrep/blob/main/lang/julia/projects.txt">set of popular packages</a>,
+measured by the <code>./scripts/lang-stat</code> and <code>./lang/test-lang</code> shell scripts in the <a href="https://github.com/returntocorp/ocaml-tree-sitter-semgrep">returntocorp/ocaml-tree-sitter-semgrep</a> repository.</p>
+<p>The improvements to the project were a success, and the grammar now parses 99.24% out 350,787 lines of Julia code correctly.</p>
+<h2 id="former-state-of-the-grammar">Former state of the grammar</h2>
+<p>The grammar was originally developed by Max Brunsfeld, the creator of tree-sitter.
+This original grammar was similar to the grammars of languages with better tree-sitter support, like Ruby and JavaScript.
+While it worked well for simple Julia code, the grammar lacked complete support for Julia specific features like:</p>
+<ul>
+<li>Multidimensional arrays.</li>
+<li>quotations, interpolations and other meta-programming syntax.</li>
+<li>Unicode identifier support.</li>
+</ul>
+<h2 id="improvements-to-the-grammar">Improvements to the grammar</h2>
+<p>The improvements were made in a dozen pull requests to the
+<a href="https://github.com/tree-sitter/tree-sitter-julia/pulls?q=is%3Apr+is%3Aclosed">tree-sitter-julia</a> repository.
+These can be grouped into two stages of development.</p>
+<h3 id="first-stage-of-development">First stage of development</h3>
+<p>The first stage consisted of broad changes to the grammar,
+focusing on aspects of the grammar that are well understood.
+I made few large changes, following a test driven development workflow.
+Each PR in this stage roughly corresponds to a group of syntactic forms:</p>
+<ul>
+<li>Modules and type definitions: <a href="https://github.com/tree-sitter/tree-sitter-julia/pull/54">#54</a></li>
+<li>Function and macro definitions: <a href="https://github.com/tree-sitter/tree-sitter-julia/pull/54">#54</a></li>
+<li>Statements (if statements, for statements): <a href="https://github.com/tree-sitter/tree-sitter-julia/pull/64">#64</a></li>
+<li>Primary expressions (function calls, array indexing, etc): <a href="https://github.com/tree-sitter/tree-sitter-julia/pull/72">#72</a></li>
+<li>Assignments: <a href="https://github.com/tree-sitter/tree-sitter-julia/pull/78">#78</a></li>
+<li>Quotables (matrices, tuples, etc): <a href="https://github.com/tree-sitter/tree-sitter-julia/pull/83">#83</a></li>
+</ul>
+<h3 id="nomenclature">Nomenclature</h3>
+<p>Throughout this first stage of development,
+I also made changes to the nomenclature to closely match the Julia intermediate representation.
+Julia users that write macros will probably be familiar with these naming conventions.</p>
+<p>The Julia documentation and internals give ambiguous naming conventions for many syntactic forms.
+In these cases I left the existing names unaltered.
+For example, while Julia is an expression-based language, many syntactic forms are still referred to as “statements”.</p>
+<p>In other cases, there’s no explicit equivalent in the reference parser to a derivation in the tree-sitter parser.
+Here, I made up a names hoping they’re sufficiently clear.
+For example, the <code>_quotable</code> rule was defined for expressions that can be quoted without parentheses,
+but this term is never used in the Julia documentation.</p>
+<h3 id="second-stage-of-development">Second stage of development</h3>
+<p>The second stage focused on more specific changes, and adding features that aren’t explicitly listed Julia documentation.
+I listed possible changes based on existing parse failures, and worked on fixing each entry in the list.
+As the grammar improved and other errors became more apparent, I updated the list and kept iterating.
+During this second stage the main set of rules I worked on were:</p>
+<ul>
+<li>Arrays, tuples and function parameters: <a href="https://github.com/tree-sitter/tree-sitter-julia/pull/83">#83</a></li>
+<li>Quotations, interpolations and macros: <a href="https://github.com/tree-sitter/tree-sitter-julia/pull/85">#85</a></li>
+<li>Unicode support: <a href="https://github.com/tree-sitter/tree-sitter-julia/pull/83">#83</a></li>
+<li>Prefixed strings: <a href="https://github.com/tree-sitter/tree-sitter-julia/pull/76">#76</a></li>
+<li>Type annotations and type parameters:
+<a href="https://github.com/tree-sitter/tree-sitter-julia/pull/77">#77</a>,
+<a href="https://github.com/tree-sitter/tree-sitter-julia/pull/87">#87</a>.</li>
+</ul>
+<p>The first stage focused on trying to simplify the grammar and improve code reuse,
+but some of those changes had to be undone in the second stage for multiple reasons.
+For example, many derivations can be parsed by Julia, but have no associated semantics,
+so in practice they’re invalid code.
+However, these “invalid” expressions can be used inside macros to define custom DSLs.
+Popular packages such as <a href="https://github.com/jump-dev/JuMP.jl">JuMP.jl</a> and <a href="https://github.com/probcomp/Gen.jl">Gen.jl</a>
+use “invalid” code in their DSLs.</p>
+<h3 id="collaboration-with-the-community">Collaboration with the community</h3>
+<p>During development, feedback from the community was very valuable.
+I asked Neovim users in the Julia Zulip chat to file issues they found,
+and Emacs users also approached the project after seeing the uptick in contributions.
+I discussed issues with the maintainers of <a href="https://github.com/nvim-treesitter/nvim-treesitter">nvim-treesitter</a>
+and contributors to the <a href="https://github.com/helix-editor/helix">Helix text editor</a>.
+I also reviewed and gave feedback on the PRs that were opened while I was working on the grammar.</p>
+<h2 id="difficulties">Difficulties</h2>
+<p>Some of the notable difficulties I had during development can be grouped into the following categories:</p>
+<h4 id="julia-has-no-formal-grammar">Julia has no formal grammar</h4>
+<p>There’s no formal lexical or syntactical grammar for the language,
+so Julia syntax is subjected to the bugs in the reference Femtolisp implementation.
+JuliaSyntax.jl, a project aimed at replacing the Femtolisp parser, has a great <a href="https://github.com/JuliaLang/JuliaSyntax.jl#flisp-parser-bugs">overview of these bugs</a>.</p>
+<h4 id="julia-syntax-has-many-context-sensitive-rules">Julia syntax has many context-sensitive rules</h4>
+<p>Context-sensitive rules can be easy to implement in an imperative, recursive-descent parser, but are very difficult to specify in a formal grammar.
+For example, the rules relating to whitespace-sensitivity and juxtapositions cannot be defined in the tree-sitter grammar DSL.</p>
+<p>Parsing context-sensitive rules correctly requires calling an external scanner written in C.
+The scanner was improved to handle some of these rules, but others were left partially specified.</p>
+<h4 id="loose-rules-vs-tighter-rules-with-more-meaning">Loose rules vs tighter rules with more meaning</h4>
+<p>Julia doesn’t distinguish some syntactic forms that have different semantic purposes.
+In particular, it doesn’t distinguish between “patterns” and expressions.</p>
+<p>For example, function parameters are parsed as tuples.
+The following quotation is syntactically valid, but cannot be evaluated because integer literals are not valid parameters.</p>
+<pre data-lang="julia" class="language-julia z-code"><code class="language-julia" data-lang="julia"><span class="z-source z-julia"><span class="z-meta z-quote z-julia"><span class="z-keyword z-other z-julia">quote</span>
+</span></span><span class="z-source z-julia"><span class="z-meta z-quote z-julia">  <span class="z-keyword z-other z-julia">function</span> <span class="z-meta z-generic-name z-julia">f</span><span class="z-meta z-group z-julia"><span class="z-punctuation z-section z-group z-begin z-julia">(</span><span class="z-constant z-numeric z-julia">1</span>, <span class="z-constant z-numeric z-julia">2</span>, <span class="z-constant z-numeric z-julia">3</span><span class="z-punctuation z-section z-group z-end z-julia">)</span></span> <span class="z-comment z-line z-number-sign z-julia"><span class="z-punctuation z-definition z-comment z-julia">#</span> Nonsense, but it parses fine.</span>
+</span></span><span class="z-source z-julia"><span class="z-meta z-quote z-julia">  <span class="z-keyword z-other z-julia">end</span>
+</span></span><span class="z-source z-julia"><span class="z-meta z-quote z-julia"><span class="z-keyword z-other z-julia">end</span></span>
+</span></code></pre>
+<p>There are many similar cases all over the grammar. That could be a whole post on its own.</p>
+<p>On one hand, this liberal use of syntax allows for more DSLs.
+One could imagine a macro for pattern matching that did allow literals as parameters.</p>
+<p>On the other hand, having more distinctions in the grammar is useful for static analysis.
+Distinguishing parameters can inform about the scope of variables and can be used by automated refactoring tools.
+The tree-sitter grammar does have these distinctions because the benefits for text editors and higher-level libraries
+seem to be worth the cost (i.e. it won’t parse the snippet above).</p>
+<h2 id="future-work">Future work</h2>
+<p>The tree-sitter parser still doesn’t parse 100% of lines of code.
+However, the few syntactic forms that aren’t parsed correctly all have alternatives.
+At this point, most additions to the grammar will have diminishing returns.</p>
+<p>The workarounds required to parse context-sensitive rules resulted in a loss of performance, and increased binary size of the compiled parser.
+Future development should focus on offloading more rules to the external scanner,
+or contributing to tree-sitter to facilitate defining these rules in the grammar DSL.</p>
+<p>The tree-sitter grammar could also be used as a starting point to specify a formal grammar for Julia.</p>
+<!-- pandoc --variable urlcolor=teal --lua-filter ./smallcaps.lua -o draft.pdf report.md -->
+
+</article>
+
+    </main>
+    <footer>
+        <a href="https://github.com/savq/savq.github.io">Source</a>
+        <a href="/atom.xml">Feed</a>
+    </footer>
+</body>
+</html>
