@@ -57,10 +57,19 @@ blockquote {
 /* Navigation bar */
 
 .navbar {
+    border-bottom: thin solid var(--fg);
     display: flex;
     justify-content: space-between;
-    border-bottom: thin solid var(--fg);
     padding: 0.5em 0em;
+}
+
+.navbar a:first-child {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.navbar a {
+  margin-left: 1rem;
 }
 
 
